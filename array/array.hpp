@@ -5,12 +5,24 @@ class Array{
     private:
     T data[N];
 
+
     public:
+    Array();
     Array(T);
     Array(T, T);
+    Array(const Array&);
+
     void show();
 
 };
+
+template<typename T, int N>
+Array<T,N>::Array(){
+    T default_value{};
+    for(int i = 0; i < N; i++){
+        data[i] = default_value;
+    }
+}
 
 
 template<typename T, int N>
@@ -28,12 +40,17 @@ Array<T, N>::Array(T x, T y){
     }
 }
 
+template<typename T, int N>
+Array<T, N>::Array(const Array& x){
+    for(int i = 0; i < N; i++){
+        data[i] = x[i];
+    }
+}
+
 
 template<typename T, int N>
-void Array<T,N>::show()
-{
-        for(int i = 0; i < N; i++)
-        {
+void Array<T,N>::show(){
+        for(int i = 0; i < N; i++){
             std::cout<<data[i];
         } 
 }

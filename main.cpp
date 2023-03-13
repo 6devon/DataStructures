@@ -8,5 +8,8 @@ int main(){
     Array<int, 10> b(1, 2);
     b.show(); 
 
+    Array<int, 10> de = a;
+    de.show();
+
 
 }
