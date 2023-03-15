@@ -14,6 +14,8 @@ class Array{
     void show();
     T operator[](int) const;
     T at(int);
+    T front();
+    T back();
 
 };
 
@@ -59,6 +61,21 @@ void Array<T,N>::show(){
         for(int i = 0; i < N; i++){
             std::cout<<data[i];
         } 
+}
+
+template<typename T, int N>
+T Array<T, N>::at(int i){
+    return data[i];
+}
+
+template<typename T, int N>
+T Array<T, N>::front(){
+    return data[0];
+}
+
+template<typename T, int N>
+T Array<T, N>::back(){
+    return data[N - 1];
 }
 
 template<typename T, int N>
