@@ -16,6 +16,7 @@ class Array{
     T at(int);
     T front();
     T back();
+    T* get_data();
 
 };
 
@@ -62,23 +63,24 @@ void Array<T,N>::show(){
             std::cout<<data[i];
         } 
 }
-
+//at method
 template<typename T, int N>
 T Array<T, N>::at(int i){
     return data[i];
 }
-
+//front method
 template<typename T, int N>
 T Array<T, N>::front(){
     return data[0];
 }
-
+//back method
 template<typename T, int N>
 T Array<T, N>::back(){
     return data[N - 1];
 }
 
+//data method
 template<typename T, int N>
-T Array<T, N>::at(int i){
-    return data[i];
+T* Array<T, N>::get_data(){
+    return data;
 }
