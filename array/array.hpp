@@ -17,6 +17,7 @@ class Array{
     T front();
     T back();
     T* get_data();
+    int size();
 
 };
 
@@ -83,4 +84,9 @@ T Array<T, N>::back(){
 template<typename T, int N>
 T* Array<T, N>::get_data(){
     return data;
+}
+
+template<typename T, int N>
+int Array<T,N>::size(){
+    return N;
 }
