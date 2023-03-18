@@ -17,7 +17,20 @@ class Array{
     T front();
     T back();
     T* get_data();
+
     int size();
+
+    template<typename I, int N>
+    class Iterator{
+
+        private:
+
+        public:
+        typedef Custom_Iterator iterator;
+
+    };
+
+    Iterator begin();
 
 };
 
@@ -60,9 +73,9 @@ T Array<T, N>::operator[](int x) const{
 //show method
 template<typename T, int N>
 void Array<T,N>::show(){
-        for(int i = 0; i < N; i++){
-            std::cout<<data[i];
-        } 
+    for(int i = 0; i < N; i++){
+        std::cout<<data[i];
+    } 
 }
 //at method
 template<typename T, int N>
@@ -86,7 +99,14 @@ T* Array<T, N>::get_data(){
     return data;
 }
 
+
+//size method
 template<typename T, int N>
 int Array<T,N>::size(){
     return N;
 }
+
+// template<typename T, int N>
+// Iterator<I, N>::begin(){
+//     return Iterator(&data[0]);
+// }
