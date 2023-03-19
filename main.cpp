@@ -15,7 +15,7 @@ int main(){
 
     int* tab2 = a.get_data();
     std::cout << *(tab2 + 3)<< std::endl;
-    std::cout<<a.size()<<std::endl;
+    std::cout << a.size() << std::endl;
 
-
+    //for(auto i = a.begin(); i != a.end(); i++)
 }

@@ -1,9 +1,35 @@
 #include<iostream>
 
+
+// template<typename T, int N>
+// class Iterator;
+template<typename Array>
+class ArrayIterator{
+
+    public:
+    using ValueType = typename Array::ValueType;
+    using PointerType = ValueType*;
+    using ReferenceType = ValueType&;
+
+    public:
+    ArrayIterator(PointerType ptr)
+        : m_Ptr(ptr) {}
+    ArrayIterator& operator++();
+    
+    
+    private:
+        PointerType m_Ptr;
+
+};
+
 template<typename T, int N>
 class Array{
     private:
     T data[N];
+
+    public:
+    using ValueType = T;
+    using Iterator = ArrayIterator<Array>;
 
 
     public:
@@ -17,20 +43,16 @@ class Array{
     T front();
     T back();
     T* get_data();
+    
+ //   T plus+ (int) const;
 
     int size();
 
-    template<typename I, int N>
-    class Iterator{
+    // template<typename T, int N>
 
-        private:
-
-        public:
-        typedef Custom_Iterator iterator;
-
-    };
 
     Iterator begin();
+    Iterator end();
 
 };
 
@@ -40,6 +62,9 @@ Array<T,N>::Array(){
     T default_value{};
     for(int i = 0; i < N; i++){
         data[i] = default_value;
+    }ArrayIterator& operator++(){
+        m_Ptr++;
+        return *this;
     }
 }
 
@@ -99,14 +124,24 @@ T* Array<T, N>::get_data(){
     return data;
 }
 
-
 //size method
 template<typename T, int N>
 int Array<T,N>::size(){
     return N;
 }
 
-// template<typename T, int N>
-// Iterator<I, N>::begin(){
-//     return Iterator(&data[0]);
-// }
+template<typename T, int N>
+ArrayIterator<Array<T,N>> Array<T, N>::begin(){
+    return ArrayIterator<T>(data);
+}
+
+template<typename T, int N>
+ArrayIterator<Array<T,N>> Array<T, N>::end(){
+    return ArrayIterator<T,N>(&data[N -1]);
+}
+
+template<typename Array>
+ArrayIterator<Array>& ArrayIterator<Array>::operator++(){
+        m_Ptr++;
+        return *this;
+    }
