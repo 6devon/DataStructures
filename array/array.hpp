@@ -12,9 +12,16 @@ class ArrayIterator{
     using ReferenceType = ValueType&;
 
     public:
+    
     ArrayIterator(PointerType ptr)
         : m_Ptr(ptr) {}
     ArrayIterator& operator++();
+    ArrayIterator operator++(int);
+    ArrayIterator& operator--();
+    ArrayIterator operator--(int);
+    ArrayIterator& operator[](int);
+    ArrayIterator& operator->();
+    ArrayIterator& operator*();
     
     
     private:
@@ -49,7 +56,7 @@ class Array{
     int size();
 
     // template<typename T, int N>
-
+    
 
     Iterator begin();
     Iterator end();
@@ -62,10 +69,8 @@ Array<T,N>::Array(){
     T default_value{};
     for(int i = 0; i < N; i++){
         data[i] = default_value;
-    }ArrayIterator& operator++(){
-        m_Ptr++;
-        return *this;
     }
+
 }
 
 //constructor with parameter
@@ -137,11 +142,56 @@ ArrayIterator<Array<T,N>> Array<T, N>::begin(){
 
 template<typename T, int N>
 ArrayIterator<Array<T,N>> Array<T, N>::end(){
-    return ArrayIterator<T,N>(&data[N -1]);
+    return ArrayIterator<T>(&data[N -1]);
 }
 
 template<typename Array>
 ArrayIterator<Array>& ArrayIterator<Array>::operator++(){
-        m_Ptr++;
-        return *this;
+    m_Ptr++;
+    return *this;
     }
+template<typename Array>
+ArrayIterator<Array> ArrayIterator<Array>::operator++(int){
+    ArrayIterator<Array> iterator = *this;
+    ++(*this);
+    return iterator;
+    }
+
+template<typename Array>
+ArrayIterator<Array>& ArrayIterator<Array>::operator--(){
+    m_Ptr--;
+    return *this;
+    }
+template<typename Array>
+ArrayIterator<Array> ArrayIterator<Array>::operator--(int){
+    ArrayIterator<Array> iterator = *this;
+    --(*this);
+    return iterator;
+    }
+
+
+// TO BE DONE
+
+
+// ReferenceType operator[](int index){
+//     return *(m_Ptr + index);
+// //or return *(m_Ptr[index]);
+
+// }
+// ReferenceType operator->(){
+//     return m_Ptr;
+// //or return *(m_Ptr[index]);
+
+// }
+// ReferenceType operator*(){
+//     return *m_Ptr;
+// }
+
+// bool operator==(const VectorIterator& other) const{
+//     return m_Ptr == other.m_Ptr;
+// }
+
+// bool operator==(const VectorIterator& other) const{
+//     return !(*this == other);
+// }
+
