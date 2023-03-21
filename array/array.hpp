@@ -12,16 +12,15 @@ class ArrayIterator{
     using ReferenceType = ValueType&;
 
     public:
-    
     ArrayIterator(PointerType ptr)
         : m_Ptr(ptr) {}
     ArrayIterator& operator++();
     ArrayIterator operator++(int);
     ArrayIterator& operator--();
     ArrayIterator operator--(int);
-    ArrayIterator& operator[](int);
-    ArrayIterator& operator->();
-    ArrayIterator& operator*();
+    ReferenceType operator[](int);
+    ReferenceType operator->();
+    ReferenceType operator*();
     
     
     private:
@@ -33,11 +32,11 @@ template<typename T, int N>
 class Array{
     private:
     T data[N];
+    T x;
 
     public:
     using ValueType = T;
     using Iterator = ArrayIterator<Array>;
-
 
     public:
     Array();
@@ -54,10 +53,7 @@ class Array{
  //   T plus+ (int) const;
 
     int size();
-
-    // template<typename T, int N>
     
-
     Iterator begin();
     Iterator end();
 
@@ -135,21 +131,26 @@ int Array<T,N>::size(){
     return N;
 }
 
+//begin method
 template<typename T, int N>
 ArrayIterator<Array<T,N>> Array<T, N>::begin(){
     return ArrayIterator<T>(data);
 }
 
+//end method
 template<typename T, int N>
 ArrayIterator<Array<T,N>> Array<T, N>::end(){
     return ArrayIterator<T>(&data[N -1]);
 }
 
+//postincrementaction
 template<typename Array>
 ArrayIterator<Array>& ArrayIterator<Array>::operator++(){
     m_Ptr++;
     return *this;
     }
+
+//preincrementation
 template<typename Array>
 ArrayIterator<Array> ArrayIterator<Array>::operator++(int){
     ArrayIterator<Array> iterator = *this;
@@ -157,11 +158,14 @@ ArrayIterator<Array> ArrayIterator<Array>::operator++(int){
     return iterator;
     }
 
+//postdecrementation
 template<typename Array>
 ArrayIterator<Array>& ArrayIterator<Array>::operator--(){
     m_Ptr--;
     return *this;
     }
+
+//predecrementation
 template<typename Array>
 ArrayIterator<Array> ArrayIterator<Array>::operator--(int){
     ArrayIterator<Array> iterator = *this;
@@ -169,23 +173,24 @@ ArrayIterator<Array> ArrayIterator<Array>::operator--(int){
     return iterator;
     }
 
+template<typename Array>
+ArrayIterator<Array>::ReferenceType ArrayIterator<Array>::operator[](int index){
+    return *(m_Ptr + index);
+//or return *(m_Ptr[index]);
+
+}
+template<typename Array>
+ArrayIterator<Array>::ReferenceType ArrayIterator<Array>:: operator->(){
+    return m_Ptr;
+//or return *(m_Ptr[index]);
+
+}
+template<typename Array>
+ArrayIterator<Array>::ReferenceType ArrayIterator<Array>:: operator*(){
+    return *m_Ptr;
+}
 
 // TO BE DONE
-
-
-// ReferenceType operator[](int index){
-//     return *(m_Ptr + index);
-// //or return *(m_Ptr[index]);
-
-// }
-// ReferenceType operator->(){
-//     return m_Ptr;
-// //or return *(m_Ptr[index]);
-
-// }
-// ReferenceType operator*(){
-//     return *m_Ptr;
-// }
 
 // bool operator==(const VectorIterator& other) const{
 //     return m_Ptr == other.m_Ptr;
