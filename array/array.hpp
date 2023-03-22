@@ -173,22 +173,32 @@ ArrayIterator<Array> ArrayIterator<Array>::operator--(int){
     return iterator;
     }
 
-template<typename Array>
-ArrayIterator<Array>::ReferenceType ArrayIterator<Array>::operator[](int index){
-    return *(m_Ptr + index);
-//or return *(m_Ptr[index]);
 
+template<typename T, int N>
+std::ostream& operator<<(std::ostream& os, const Array<T, N>& ar){
+    for(int i = 0; i < N; i++){
+        os << ar[i] << " ";
+    }
+    os << std::endl;
+    return os;
 }
-template<typename Array>
-ArrayIterator<Array>::ReferenceType ArrayIterator<Array>:: operator->(){
-    return m_Ptr;
-//or return *(m_Ptr[index]);
 
-}
-template<typename Array>
-ArrayIterator<Array>::ReferenceType ArrayIterator<Array>:: operator*(){
-    return *m_Ptr;
-}
+// template<typename Array>
+// ArrayIterator<Array>::ReferenceType ArrayIterator<Array>::operator[](int index){
+//     return *(m_Ptr + index);
+// //or return *(m_Ptr[index]);
+
+// }
+// template<typename Array>
+// ArrayIterator<Array>::ReferenceType ArrayIterator<Array>:: operator->(){
+//     return m_Ptr;
+// //or return *(m_Ptr[index]);
+
+// }
+// template<typename Array>
+// ArrayIterator<Array>::ReferenceType ArrayIterator<Array>:: operator*(){
+//     return *m_Ptr;
+//}
 
 // TO BE DONE
 
