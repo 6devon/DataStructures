@@ -49,6 +49,7 @@ class Array{
     T front();
     T back();
     T* get_data();
+    void swap_with_index(int,int);
     
  //   T plus+ (int) const;
 
@@ -181,6 +182,13 @@ std::ostream& operator<<(std::ostream& os, const Array<T, N>& ar){
     }
     os << std::endl;
     return os;
+}
+
+template<typename T, int N>
+void Array<T,N>::swap_with_index(int index1, int index2){
+    auto temp = data[index1];
+    data[index1] = data[index2];
+    data[index2] = temp;
 }
 
 // template<typename Array>
