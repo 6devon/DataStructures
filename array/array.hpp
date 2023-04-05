@@ -50,6 +50,7 @@ class Array{
     T back();
     T* get_data();
     void swap_with_index(int,int);
+    void add_to_every_element(T);
     
  //   T plus+ (int) const;
 
@@ -190,6 +191,14 @@ void Array<T,N>::swap_with_index(int index1, int index2){
     data[index1] = data[index2];
     data[index2] = temp;
 }
+
+template<typename T, int N>
+void Array<T,N>::add_to_every_element(T elem){
+    for(int i = 0 ; i < N ; i++){
+        data[i] += elem;
+    }
+}
+
 
 // template<typename Array>
 // ArrayIterator<Array>::ReferenceType ArrayIterator<Array>::operator[](int index){
