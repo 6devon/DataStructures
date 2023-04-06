@@ -200,22 +200,22 @@ void Array<T,N>::add_to_every_element(T elem){
 }
 
 
-// template<typename Array>
-// ArrayIterator<Array>::ReferenceType ArrayIterator<Array>::operator[](int index){
-//     return *(m_Ptr + index);
-// //or return *(m_Ptr[index]);
+template<typename Array>
+typename ArrayIterator<Array>::ReferenceType ArrayIterator<Array>::operator[](int index){
+    return *(m_Ptr + index);
+//or return *(m_Ptr[index]);
 
-// }
-// template<typename Array>
-// ArrayIterator<Array>::ReferenceType ArrayIterator<Array>:: operator->(){
-//     return m_Ptr;
-// //or return *(m_Ptr[index]);
+}
+template<typename Array>
+typename ArrayIterator<Array>::ReferenceType ArrayIterator<Array>::operator->(){
+    return m_Ptr;
+//or return *(m_Ptr[index]);
 
-// }
-// template<typename Array>
-// ArrayIterator<Array>::ReferenceType ArrayIterator<Array>:: operator*(){
-//     return *m_Ptr;
-//}
+}
+template<typename Array>
+typename ArrayIterator<Array>::ReferenceType ArrayIterator<Array>::operator*(){
+    return *m_Ptr;
+}
 
 // TO BE DONE
 
