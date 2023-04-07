@@ -1,4 +1,5 @@
 #include<iostream>
+#include<vector>
 
 
 // template<typename T, int N>
@@ -49,6 +50,7 @@ class Array{
     T front();
     T back();
     T* get_data();
+    std::vector<T> to_vector();
     void swap_with_index(int,int);
     void add_to_every_element(T);
     
@@ -125,6 +127,16 @@ T Array<T, N>::back(){
 template<typename T, int N>
 T* Array<T, N>::get_data(){
     return data;
+}
+
+template<typename T,int N>
+std::vector<T> Array<T,N>::to_vector(){
+    std::vector<T> vec;
+    for(int i = 0; i < N; i++){
+        vec.push_back(data[i]);
+    }
+
+    return vec;
 }
 
 //size method
