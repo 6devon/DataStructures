@@ -23,7 +23,6 @@ class ArrayIterator{
     ReferenceType operator->();
     ReferenceType operator*();
     
-    
     private:
         PointerType m_Ptr;
 
@@ -53,13 +52,18 @@ class Array{
     std::vector<T> to_vector();
     void swap_with_index(int,int);
     void add_to_every_element(T);
-    
- //   T plus+ (int) const;
+    void fill(int);
 
     int size();
+    int max_size();
+    bool empty();
+
     
     Iterator begin();
     Iterator end();
+    Iterator rbegin();
+    Iterator rend();
+
 
 };
 
@@ -129,6 +133,7 @@ T* Array<T, N>::get_data(){
     return data;
 }
 
+//pushback method
 template<typename T,int N>
 std::vector<T> Array<T,N>::to_vector(){
     std::vector<T> vec;
@@ -145,6 +150,20 @@ int Array<T,N>::size(){
     return N;
 }
 
+template<typename T, int N>
+int Array<T,N>::max_size(){
+    return N;
+}
+
+template<typename T, int N>
+bool Array<T,N>::empty(){
+    if(N==0){
+        return true;
+    } else {
+        return false;
+    }
+}
+
 //begin method
 template<typename T, int N>
 ArrayIterator<Array<T,N>> Array<T, N>::begin(){
@@ -155,6 +174,16 @@ ArrayIterator<Array<T,N>> Array<T, N>::begin(){
 template<typename T, int N>
 ArrayIterator<Array<T,N>> Array<T, N>::end(){
     return ArrayIterator<T>(&data[N -1]);
+}
+
+template<typename T, int N>
+ArrayIterator<Array<T,N>> Array<T, N>::rbegin(){
+    return ArrayIterator<T>(&data[N -1]);
+}
+
+template<typename T, int N>
+ArrayIterator<Array<T,N>> Array<T, N>::rend(){
+    return ArrayIterator<T>(data);
 }
 
 //postincrementaction
@@ -188,6 +217,7 @@ ArrayIterator<Array> ArrayIterator<Array>::operator--(int){
     }
 
 
+//
 template<typename T, int N>
 std::ostream& operator<<(std::ostream& os, const Array<T, N>& ar){
     for(int i = 0; i < N; i++){
@@ -197,6 +227,7 @@ std::ostream& operator<<(std::ostream& os, const Array<T, N>& ar){
     return os;
 }
 
+//swap with index constructor
 template<typename T, int N>
 void Array<T,N>::swap_with_index(int index1, int index2){
     auto temp = data[index1];
@@ -204,6 +235,7 @@ void Array<T,N>::swap_with_index(int index1, int index2){
     data[index2] = temp;
 }
 
+//add to every element constructor
 template<typename T, int N>
 void Array<T,N>::add_to_every_element(T elem){
     for(int i = 0 ; i < N ; i++){
@@ -211,6 +243,12 @@ void Array<T,N>::add_to_every_element(T elem){
     }
 }
 
+template<typename T, int N>
+void Array<T,N>::fill(int num){
+    for(int i = 0 ; i < N ; i++){
+        data[i] = num;
+    }
+}
 
 template<typename Array>
 typename ArrayIterator<Array>::ReferenceType ArrayIterator<Array>::operator[](int index){
@@ -230,7 +268,7 @@ typename ArrayIterator<Array>::ReferenceType ArrayIterator<Array>::operator*(){
 }
 
 // TO BE DONE
-
+// template <typename Array>
 // bool operator==(const VectorIterator& other) const{
 //     return m_Ptr == other.m_Ptr;
 // }
