@@ -15,6 +15,9 @@ public:
     Vector(const Vector& other);
     Vector& operator=(const Vector& other);
     ~Vector();
+    void push_back(const T& element);
+    void resize();
+
     // T at(int);
     // T& operator[](int);
     // T front();
@@ -61,6 +64,20 @@ Vector<T>& Vector<T>::operator=(const Vector& other){
 template<typename T>
 Vector<T>::~Vector(){
     delete[] elements;
+}
+
+template <typename T>
+void Vector<T>::push_back(const T& element){
+    if(size == capacity){
+        resize();
+    }
+    elements[size] = element;
+    ++size;
+}
+
+template <typename T>
+void Vector<T>::resize(){
+    //TBD
 }
 
 // template<typename T>
