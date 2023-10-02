@@ -17,9 +17,10 @@ public:
     ~Vector();
     void push_back(const T& element);
     void resize();
+    int f_size();
 
     // T at(int);
-    // T& operator[](int);
+    T& operator[](int index);
     // T front();
     // T back();
     //T* data();
@@ -77,7 +78,25 @@ void Vector<T>::push_back(const T& element){
 
 template <typename T>
 void Vector<T>::resize(){
-    //TBD
+    int newCapacity = (capacity == 0) ? 1 : capacity * 2;
+    T* newElements = new T[newCapacity];
+    for(int i = 0; i < size; ++i){
+        newElements[i] = elements[i];
+    }
+    delete[] elements;
+    elements = newElements;
+    capacity = newCapacity;
+}
+
+template <typename T>
+int Vector<T>::f_size() {return this -> size;}
+
+template <typename T> 
+T& Vector<T>::operator[](int index){
+    if(index < 0 || index >= size) {
+        throw std::out_of_range("Index out of range");
+    }
+    return elements[index];
 }
 
 // template<typename T>
