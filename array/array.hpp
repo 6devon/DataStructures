@@ -13,8 +13,7 @@ class ArrayIterator{
     using ReferenceType = ValueType&;
 
     public:
-    ArrayIterator(PointerType ptr)
-        : m_Ptr(ptr) {}
+    ArrayIterator(PointerType ptr) : m_Ptr(ptr) {}
     ArrayIterator& operator++();
     ArrayIterator operator++(int);
     ArrayIterator& operator--();
@@ -44,15 +43,15 @@ class Array{
     Array(T, T);
     Array(const Array&);
     void show();
-    T operator[](int) const;
-    T at(int);
-    T front();
-    T back();
+    T& operator[](int) const;
+    T& at(int);
+    T& front();
+    T& back();
     T* get_data();
     std::vector<T> to_vector();
     void swap_with_index(int,int);
     void add_to_every_element(T);
-    void fill(int);
+    void fill(T);
 
     int size();
     int max_size();
@@ -101,29 +100,29 @@ Array<T, N>::Array(const Array& x){
 }
 //overload[] operator
 template<typename T, int N>
-T Array<T, N>::operator[](int x) const{
+T& Array<T, N>::operator[](int x) const{
     return data[x];
 }
 //show method
 template<typename T, int N>
 void Array<T,N>::show(){
     for(int i = 0; i < N; i++){
-        std::cout<<data[i];
+        std::cout<<data[i] << '\n';
     } 
 }
 //at method
 template<typename T, int N>
-T Array<T, N>::at(int i){
+T& Array<T, N>::at(int i){
     return data[i];
 }
 //front method
 template<typename T, int N>
-T Array<T, N>::front(){
+T& Array<T, N>::front(){
     return data[0];
 }
 //back method
 template<typename T, int N>
-T Array<T, N>::back(){
+T& Array<T, N>::back(){
     return data[N - 1];
 }
 
@@ -133,7 +132,7 @@ T* Array<T, N>::get_data(){
     return data;
 }
 
-//pushback method
+//to vector method
 template<typename T,int N>
 std::vector<T> Array<T,N>::to_vector(){
     std::vector<T> vec;
@@ -186,14 +185,14 @@ ArrayIterator<Array<T,N>> Array<T, N>::rend(){
     return ArrayIterator<T>(data);
 }
 
-//postincrementaction
+//preincrementation
 template<typename Array>
 ArrayIterator<Array>& ArrayIterator<Array>::operator++(){
-    m_Ptr++;
+    ++m_Ptr;
     return *this;
     }
 
-//preincrementation
+//postincrementaction
 template<typename Array>
 ArrayIterator<Array> ArrayIterator<Array>::operator++(int){
     ArrayIterator<Array> iterator = *this;
@@ -201,14 +200,14 @@ ArrayIterator<Array> ArrayIterator<Array>::operator++(int){
     return iterator;
     }
 
-//postdecrementation
+//predecrementation
 template<typename Array>
 ArrayIterator<Array>& ArrayIterator<Array>::operator--(){
     m_Ptr--;
     return *this;
     }
 
-//predecrementation
+//postdecrementation
 template<typename Array>
 ArrayIterator<Array> ArrayIterator<Array>::operator--(int){
     ArrayIterator<Array> iterator = *this;
@@ -244,7 +243,7 @@ void Array<T,N>::add_to_every_element(T elem){
 }
 
 template<typename T, int N>
-void Array<T,N>::fill(int num){
+void Array<T,N>::fill(T num){
     for(int i = 0 ; i < N ; i++){
         data[i] = num;
     }

@@ -13,7 +13,7 @@ public:
     Vector();
     Vector(int initialCapacity);
     Vector(const Vector& other);
-    Vector& operator=(const Vector& other);
+    Vector& operator=(const Vector& other); //reference
     ~Vector();
     void push_back(const T& element);
     void resize();
@@ -27,10 +27,10 @@ public:
 };
 //constructors implementation
 template<typename T>
-Vector<T>::Vector(): elements(nullptr), size(0), capacity(0){ //null pointer value is used to indicate that a pointer does not point ro aany valid memory adress
+Vector<T>::Vector(): elements(nullptr), size(0), capacity(0){ //null pointer value is used to indicate that a pointer does not point to any valid memory adress
 }
 template<typename T>
-Vector<T>::Vector(int initialCapacity): elements(nullptr), size(0), capacity(initialCapacity){ //null pointer value is used to indicate that a pointer does not point or any valid memory adress
+Vector<T>::Vector(int initialCapacity): elements(nullptr), size(0), capacity(initialCapacity){ 
     elements = new T[capacity];
 }
 
@@ -45,7 +45,6 @@ Vector<T>::Vector(const Vector& other): elements(nullptr), size(other.size), cap
         elements[i] = other.elements[i];
     }
 }
-
 //assigment operator
 template<typename T>
 Vector<T>& Vector<T>::operator=(const Vector& other){
